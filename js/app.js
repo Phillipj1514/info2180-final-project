@@ -1,0 +1,2 @@
+document.addEventListener("DOMContentLoad",function (){
+});
