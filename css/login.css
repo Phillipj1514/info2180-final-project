@@ -1,0 +1,97 @@
+html{
+  box-sizing: content-box;
+}
+
+body{
+  margin :0;
+  background-color: #f2f2f2;
+}
+
+header{
+  background-color: black;
+}
+
+header h1{
+  color: white;
+}
+
+
+.grid-container{
+  display: grid;
+  grid-template: 1fr 1fr 1fr 1fr 2fr / 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 15px 0px;
+  width: auto;
+  height: auto;
+  /* padding: 20px; */
+  /*background-color: yellow;*/
+
+}
+
+.G-div1{ /* --HEADER-- */
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end:6;
+  /* border: 4px white dotted; */
+  background-color: black;
+  display: flex;
+  align-items: flex-end;
+
+
+}
+
+.G-div2{ /* --SIDEBAR */
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 10px;
+  height: auto;
+  grid-row-start: 3;
+  grid-row-end: 6;
+  grid-column-start:2;
+  grid-column-end: 5;
+  background-color: white;
+
+}
+
+/* .G-div3{
+  grid-row-start: 2;
+  grid-row-end: 5;
+  grid-column-start:3;
+  grid-column-end: 6;
+  /*background-color: red;*/
+
+} */
+
+form{
+
+}
+
+form input.textbox{
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  color: black;
+  width: 60% ;
+  height: 25px;
+
+}
+
+
+
+button{
+  margin: 10px;
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+  width: 30%;
+  height: 50px;
+  font-size: 15px;
+
+}
+
+
+button:hover{
+  background-color: #f1f1f1;
+  color: black;
+  transition: 0.6s;
+}

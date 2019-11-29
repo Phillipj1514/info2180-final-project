@@ -1,0 +1,249 @@
+html{
+  box-sizing: content-box;
+}
+
+body{
+  margin :0;
+  background-color: #f1f1f1;
+  height: 100%;
+}
+
+header{
+  /*border: 1px purple dotted;*/
+  background-color: black;
+}
+
+header h1{
+  color: white;
+
+}
+
+h2{
+  font-size: 35px;
+  font-weight: bold;
+
+}
+
+form input{
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  color: black;
+  width: 60% ;
+  height: 25px;
+
+}
+
+form input.textarea{
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  color: black;
+  width: 60% ;
+  height: 80px;
+
+}
+
+form select{
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  color: black;
+  width: 60% ;
+  height: 25px;
+
+}
+
+form select option{
+  /* margin: 10px;
+  border-radius: 5px; */
+  background-color: #f2f2f2;
+  color: black;
+  width: 60% ;
+  height: 25px;
+
+}
+
+label{
+  font-weight: bold;
+}
+
+button{
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #2196F3;
+  color: white;
+  width: 25%;
+  height: 50px;
+  font-size: 15px;
+
+}
+
+button:hover {background: #0b7dda;}
+
+.newIssueBtn{
+  float: right;
+  clear:right;
+  background-color: #4CAF50;
+}
+
+.newIssueBtn:{
+  transition: 0.3s;
+  background-color: #46a049;
+}
+
+.smallBtn{
+  width: 10%;
+  height: 30px;
+  background-color: #0000cc;
+}
+
+
+.inline{
+  display: inline-block;
+}
+.sidenav a{
+  font-weight: bold;
+}
+
+.fullscreen{
+  height: 100%;
+  background-color: blue;
+}
+
+
+.grid-container{
+  display: grid;
+  grid-template: 1fr 1fr 1fr 1fr 1fr / 1fr 1fr 1fr 1fr 1fr;
+  /* grid-gap: 15px 15px; */
+  width: auto;
+  /* padding: 20px; */
+  /*background-color: yellow;*/
+
+}
+
+.G-div1{ /* --HEADER-- */
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end:6;
+  /*border: 4px white dotted;*/
+
+  background-color: black;
+  display: flex;
+  align-items: flex-end;
+
+
+}
+
+.G-div2{ /* --SIDEBAR */
+  grid-row-start: 2;
+  grid-row-end: 5;
+  grid-column-start:1;
+  grid-column-end: 3;
+  /*background-color: blue;*/
+  background-color: #f2f2f2;
+
+}
+
+.G-div3{
+  grid-row-start: 2;
+  grid-row-end: 6;
+  grid-column-start:3;
+  grid-column-end: 6;
+  background-color: white;
+
+}
+
+.G-main{
+  grid-row-start: 2;
+  grid-row-end: 6;
+  grid-column-start:1;
+  grid-column-end: 6;
+  background-color: white;
+
+}
+.F-mainContainer{
+  height: 100%;
+  display:flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+}
+
+.flex-container{
+  display: flex;
+  flex-direction: column;
+  /* align-items: center;
+  justify-content: space-around; */
+  background-color: black;
+  /* height:60%; */
+  width: 100%;
+  border: 2px black solid;
+}
+
+.F-div1{
+  border: 2px white dotted;
+  /* margin: 5px; */
+
+}
+
+.Main-container{
+  width: 80%;
+  /* height: 100%; */
+  padding: 10px;
+  border: 1px black solid;
+  background-color: white;
+  text-align: left;
+
+}
+
+.Sidebar-container{
+  text-align: center;
+  width: 20%;
+  /* height: 100%; */
+  /* float: right; */
+  background-color: #f2f2f2;
+  border: 1px black solid;
+}
+
+.sidenav{
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 100%; /* Set the width of the sidebar */
+  position: static; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  /* top: 0; /* Stay at the top */ */
+  left: 0;
+  /* background-color: #111; /* Black */ */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+
+
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  /* color: #818181; */
+  color: black;
+  display: block;
+}
+
+.sidenav a:hover {
+  background-color: white;
+  color: black;
+}
+
+
+
+/* .flex-mini-container{
+  display: flex;
+  flex-direction: row;
+  justify-content:flex-start;
+} */
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
