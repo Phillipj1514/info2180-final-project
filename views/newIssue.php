@@ -1,22 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <link rel = "stylesheet" type = "text/css" href="css/layout.css">
-
-  <script src = "index.js"></script>
-</head>
-
-<body>
-  <div class = "grid-container">
-    <div class = "G-div1" >
-      <div class = "flex-container">
-        <header>
-          <h1> BugMe Issue Tracker </h1>
-        </header>
-      </div>
-    </div>
-
-
+<script src = "index.js"></script>
+<section>
     <div class = "G-main">
       <div class = "F-mainContainer">
         <div class = "Sidebar-container">
@@ -67,8 +50,5 @@
 
 
 </div>
-
 </div>
-</body>
-
-</html>
+</section>
