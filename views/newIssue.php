@@ -1,5 +1,27 @@
+<<<<<<< HEAD:views/newIssue.php
 <script src = "index.js"></script>
 <section>
+=======
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel = "stylesheet" type = "text/css" href="css/layout.css">
+
+  <script src = "scripts/index.js"></script>
+</head>
+
+<body>
+  <div class = "grid-container">
+    <div class = "G-div1" >
+      <div class = "flex-container">
+        <header>
+          <h1> BugMe Issue Tracker </h1>
+        </header>
+      </div>
+    </div>
+
+
+>>>>>>> b86b6c9893263eb117c321d700f98282c75abbc7:newIssue.html
     <div class = "G-main">
       <div class = "F-mainContainer">
         <div class = "Sidebar-container">
