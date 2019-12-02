@@ -15,6 +15,9 @@ header h1{
   color: white;
 }
 
+.Error {
+    border:2px solid red;
+}
 
 .grid-container{
   display: grid;
@@ -86,6 +89,7 @@ button{
   width: 30%;
   height: 50px;
   font-size: 15px;
+  cursor: pointer;
 
 }
 
