@@ -1,17 +1,5 @@
 <script src = "scripts/index.js"></script>
 <section>
-    <div class = "G-main">
-      <div class = "F-mainContainer">
-        <div class = "Sidebar-container">
-          <div class="sidenav">
-            <a href="home.html">Home</a>
-            <a href="index.html">Add User</a>
-            <a href="newIssue.html">New Issue</a>
-            <a href="login.html">Logout</a>
-          </div>
-        </div>
-
-        <div class = "Main-container">
           <h2> New User </h2>
           <form>
             <label for = "Firstname"> Firstname </label><br>
@@ -26,10 +14,6 @@
           </form>
           <div id = "result"></div>
         </div>
-      </div>
-
-
-</div>
 
 </div>
 </section>
