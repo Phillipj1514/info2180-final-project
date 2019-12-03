@@ -1,5 +1,4 @@
 
-<script src = "scripts/home.js"></script>
 <section>
     <div class = "Main-container">
       <h2 class = "inline"> Issues </h2>
@@ -13,3 +12,5 @@
     </div>
     
 </section>
+<script src = "scripts/home.js"></script>
+

@@ -1,16 +1,12 @@
-window.onload = function(){
-  var valid = 0;
+main();
+function main(){
+  let valid;
   var button = document.getElementById("submit");
   button.addEventListener("click", function(){
     valid = 0;
-    let url = "scripts/login.php";
-    // alert("mhm");
-
+    let url = "scripts/authenticate.php";
 
     let email = document.getElementById("email").value;
-
-
-
     let password = document.getElementById("password").value;
 
     clearInput("email");
@@ -21,28 +17,12 @@ window.onload = function(){
     isEmpty("password",password);
 
     if (valid == 0){
-    console.log("hello");
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function(){
       if(this.readyState === this.DONE && this.status === 200){
         let result = this.responseText;
-
         console.log(result);
-
-        // console.log(result === "valid");
-
-        if (result === "valid"){
-          alert("vaild user");
-          location.assign("./index.html");
-        }else if(result == "User not found"){
-          alert("invalid user");
-          document.getElementById("email").classList.add("Error");
-        }
-        else{
-          alert("not valid user or password");
-          document.getElementById("email").classList.add("Error");
-          document.getElementById("password").classList.add("Error");
-        }
+        processResult(result);        
       }
     };
 
@@ -52,31 +32,39 @@ window.onload = function(){
   }
 
   });
-
-
   function clearInput(name){
     document.getElementById(name).classList.remove("Error");
   }
-
-
+  
+  
   function isEmpty(name,value){
-
       if (value == ""){
           document.getElementById(name).classList.add("Error");
           valid = -1;
-
       }
-
+  }
+  
+  function isValidEmail(name,value){
+    var validPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/i;
+    if ((validPattern.test(value)) == false){
+      document.getElementById(name).classList.add("Error");
+      valid = -1;
     }
-
-      function isValidEmail(name,value){
-        var validPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/i;
-        if ((validPattern.test(value)) == false){
-          document.getElementById(name).classList.add("Error");
-          valid = -1;
-        }
-      }
-
-
-
+  }
+  function processResult(result){
+    if (result === "valid"){
+      //alert("vaild user");
+      navbar.show();
+      mainContent.load('views/home.php');
+      $.getScript( "scripts/home.js", function( data, textStatus, jqxhr ){});
+    }else if(result == "User not found"){
+      alert("invalid Credentials");
+      document.getElementById("email").classList.add("Error");
+    }
+    else{
+      alert("Invalid Email or Password");
+      document.getElementById("email").classList.add("Error");
+      document.getElementById("password").classList.add("Error");
+    }
+  }
 }

@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
-$username = 'root';
-$password = '';
+$username = 'bugme_user';
+$password = 'Bugmepassword_1';
 $dbname = 'bugme';
 
 
@@ -27,39 +27,31 @@ $userPW = test_input($_POST["password"]);
 
 // echo $country;
 $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
-
-$stmt = $conn->query("SELECT * FROM users WHERE email LIKE '%$userUN%'");
-
-$results = $stmt -> fetchall(PDO::FETCH_ASSOC);
+$stmt = $conn->prepare("SELECT * FROM Users WHERE email LIKE :email");
+$stmt->bindParam(':email',$userUN);
+$stmt->execute();
+$results = $stmt -> fetchall();
 
 // var_dump($results);
 
 if((sizeof($results)) < 1){
   $response = "User not found";
-
   echo($response);
-
 }else{
-
-
-// $newPass = "password123";
-
-
-// $hash = password_hash("password123",PASSWORD_DEFAULT);
-
-if (password_verify($userPW,$results[0]["password"])) {
-// Correct Password
-// echo "Password: $newPass"."<br>";
-
-$response = "valid";
-echo $response;
-// echo 'valid password!'."<br>";
-// echo ("hashed password for admin: $hash");
-} else {
-// Wrong password
-echo 'Invalid password';
-}
-
+  if (password_verify($userPW,$results[0]["password"])) {
+    session_start();
+    $_SESSION['user'] = $results[0];
+    $response = "valid";
+    $usercookie = "".$userUN.",".$results[0]["password"]."";
+    setcookie("login", "1", time() + (86400 *1), "/");
+    setcookie("user", $usercookie, time() + (86400 *1), "/");
+    echo $response;
+    // echo 'valid password!'."<br>";
+    // echo ("hashed password for admin: $hash");
+  } else {
+    // Wrong password
+    echo 'Invalid password';
+  }
 }
 
 

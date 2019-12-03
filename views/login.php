@@ -1,6 +1,5 @@
-<script src = "scripts/login.js"></script>
-<section>
-<div class = "G-div2">
+<section id="main-div">
+<div class = "G-div2" >
     <h2> <u>Login</u> </h2>
     <form>
       <label for = "email"> Email </label><br>
@@ -11,5 +10,6 @@
     </form>
     <div id = "result"></div>
   </div>
-
 </section>
+<script src = "../scripts/login.js"></script>
+

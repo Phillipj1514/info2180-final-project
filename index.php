@@ -3,7 +3,7 @@
 <head>
     <link rel = "stylesheet" type = "text/css" href="css/layout.css">
     <link rel = "stylesheet" type = "text/css" href="css/login.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src = "scripts/app.js"></script>
 </head>
 <body>
@@ -20,12 +20,12 @@
                 <a href="#home">Home</a>
                 <a href="#add-user">Add User</a>
                 <a href="#new-issue">New Issue</a>
-                <a href="#logout">Logout</a>
+                <a href="#">Logout</a>
             </div>
             </div>
 
         <div class = "Main-container">
-            <?php include('views/main.php');?>
+            <?php include('views/home.php');?>
         </div>
     </div>
     </div>

@@ -1,0 +1,1 @@
+GRANT ALL PRIVILEGES ON bugme.* TO 'bugme_user'@'localhost' IDENTIFIED BY 'Bugmepassword_1';

@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `firstname`, `lastname`, `password`, `email`, `date_joined`) VALUES
+INSERT INTO `Users` (`id`, `firstname`, `lastname`, `password`, `email`, `date_joined`) VALUES
 (1, 'admin', 'admin', '$2y$10$T3sp8lBbZtALhpWYDAJyU.Z3o/KeZTAUqXE6qho6QV3Bo34Yl3sEG', 'admin@bugme.com', '2019-11-23 21:58:46');
 COMMIT;
 
