@@ -30,6 +30,12 @@ if($_SERVER['REQUEST_METHOD'] == "GET"){
                     session_destroy();
                     echo "done";
                     break;
+                case "allUsers":
+                    echo getUserSelectors($conn);
+                    break;
+                case "getAllIssues":
+                    echo getIssues($conn);
+                    break;
                 default:
                     echo"invalid";
             }
@@ -43,6 +49,9 @@ if($_SERVER['REQUEST_METHOD'] == "GET"){
             switch($_REQUEST['method']){
                 case "add-user":
                     echo addUser($conn);
+                    break;
+                case "add-issue":
+                    echo addIssue($conn);
                     break; 
                 default:
                     echo"invalid";
@@ -51,6 +60,60 @@ if($_SERVER['REQUEST_METHOD'] == "GET"){
         default:
             echo"invalid";
     }
+}
+
+function getIssues($conn){
+    $request = $conn->prepare("SELECT * FROM Issues");
+    $request->execute();
+    $results = $request->fetchall();
+    $issues ="";
+    if(count($results)>0){
+        foreach($results as $issue){
+            $user = getUser($issue['assigned_to'], $conn);
+            $issues.='<tr>
+            <td class="tTitle"> <p class="title-num">#'.$issue['id'].'</p><p class="title-text">'.$issue['title'].'</p></td>
+            <td class="tType">'.$issue['type'].'</td>
+            <td class="tStatus">'.$issue['status'].'</td>
+            <td class="tassign">'.$user['firstname'].' '.$user['lastname'].'</td>
+            <td class="tcreate">'.$issue['created'].'</td>
+          </tr>';
+        }
+        return $issues;
+    }
+    return "invalid";
+}
+
+function addIssue($conn){
+    $title = filter_var(htmlspecialchars($_REQUEST['title']), FILTER_SANITIZE_STRING);
+    $description = filter_var(htmlspecialchars($_REQUEST['description']), FILTER_SANITIZE_STRING);
+    $assignedUser = filter_var(htmlspecialchars($_REQUEST['user']), FILTER_SANITIZE_STRING);
+    $type = filter_var(htmlspecialchars($_REQUEST['type']), FILTER_SANITIZE_STRING);
+    $priority = filter_var(htmlspecialchars($_REQUEST['priority']), FILTER_SANITIZE_STRING);
+    $valid = TRUE;
+    $valid =validateInput($title,"text");
+    $valid =validateInput($description,"text");
+    $valid =validateInput($assignedUser,"email");
+    $valid =validateInput($type,"type");
+    $valid =validateInput($priority,"priority");
+    if($valid){
+        $userId = getUserId($assignedUser, $conn);
+        if($userId > 0){
+            $status ="Open";
+            $request = $conn->prepare("INSERT INTO Issues(title, description, type, priority, status, assigned_to, created_by, updated) 
+            VALUES(:title, :desc, :type, :priority, :status, :assign, :create_user, NOW())");
+            $request->bindParam(":title",$title);
+            $request->bindParam(":desc",$description);
+            $request->bindParam(":type",$type);
+            $request->bindParam(":priority",$priority);
+            $request->bindParam(":status",$status);
+            $request->bindParam(":assign",$userId);
+            $request->bindParam(":create_user",$_SESSION['user']['id']);
+            $request->execute();
+            return "done";
+
+        } 
+    }
+    return "invalid";
 }
 
 function addUser($conn){
@@ -92,6 +155,21 @@ function addUser($conn){
 
 }
 
+function getUserSelectors($conn){
+    $options ='';
+    $request = $conn->prepare("SELECT * FROM Users");
+    $request->execute();
+    $results = $request-> fetchall();
+    //print_r($results);
+    if(count($results)>0){
+        foreach($results as $user){
+            $options.='<option value="'.$user['email'].'">'.$user['firstname'].' '.$user['lastname'].'</option>';
+        }
+        return $options;
+    }
+    return'<option value="none">none</option>';
+}
+
 function validateInput($string, $type){
     $valid  = FALSE;
     if($type == "text"){
@@ -112,6 +190,44 @@ function validateInput($string, $type){
                 $valid = TRUE;
             }
         }
+    }else if($type === "type"){
+        $typePattern = "/(bug|proposal|task)/";
+        if(strlen($string) > 0){
+            if(preg_match($typePattern,$string)){
+                $valid = true;
+            }
+        }
+    }else if($type === "priority"){
+        $priorityPattern = "/(minor|major|critical)/";
+        if(strlen($string) > 0){
+            if(preg_match($priorityPattern,$string)){
+                $valid = true;
+            }
+        }
     }
     return $valid;
+}
+
+function getUserId($email, $conn){
+    $check_available = $conn->prepare("SELECT * FROM Users WHERE email LIKE :email");
+    $check_available->bindParam(":email", $email);
+    $check_available->execute();
+    $results = $check_available-> fetchall();
+    if(count($results) >0){
+        $id = $results[0]['id'];
+        return $id;
+    }
+    return -1;
+}
+
+function getUser($id, $conn){
+    $check_available = $conn->prepare("SELECT * FROM Users WHERE id LIKE :id");
+    $check_available->bindParam(":id", $id);
+    $check_available->execute();
+    $results = $check_available-> fetchall();
+    if(count($results) >0){
+        $user = $results[0];
+        return $user;
+    }
+    return "none";
 }
