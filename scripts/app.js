@@ -1,6 +1,7 @@
 let mainContent;
 let navbar;
 let sessionId = "";
+let issueViewId;
 $(document).ready(function () {
     mainContent = $(".Main-container");
     navbar = $(".sidenav");

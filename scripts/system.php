@@ -34,7 +34,17 @@ if($_SERVER['REQUEST_METHOD'] == "GET"){
                     echo getUserSelectors($conn);
                     break;
                 case "getAllIssues":
-                    echo getIssues($conn);
+                    echo getIssues("all",$conn);
+                    break;
+                case "getOpenIssues":
+                    echo getIssues("open",$conn);
+                    break;
+                case "getUserIssues":
+                    echo getIssues("user",$conn);
+                    break;
+                case "issue":
+                    $id = $_REQUEST['id'];
+                    echo getIssue($id,$conn);
                     break;
                 default:
                     echo"invalid";
@@ -52,7 +62,12 @@ if($_SERVER['REQUEST_METHOD'] == "GET"){
                     break;
                 case "add-issue":
                     echo addIssue($conn);
-                    break; 
+                    break;
+                case "issue":
+                    $option=$_REQUEST['status'];
+                    $id = $_REQUEST['id'];
+                    echo updateIssueStatus($id,$option, $conn);
+                    break;
                 default:
                     echo"invalid";
             }
@@ -61,22 +76,67 @@ if($_SERVER['REQUEST_METHOD'] == "GET"){
             echo"invalid";
     }
 }
+function updateIssueStatus($id, $option, $conn){
+    $status = "";
+    if($option == "closed"){$status = "Closed";}
+    elseif($option == "progress"){$status = "In Progress";}
+    else{return "invalid";}
+    $request = $conn->prepare("UPDATE Issues SET status=:status, updated=NOW() WHERE id=:id");
+    $request->bindParam(":status",$status);
+    $request->bindParam(":id",$id);
+    $request->execute();
+    return "done";
 
-function getIssues($conn){
+}
+
+function getIssue($id, $conn){
+    $request = $conn->prepare("SELECT * FROM Issues WHERE id LIKE :id");
+    $request->bindParam(":id", $id);
+    $request->execute();
+    $results = $request-> fetchall();
+    if(count($results) >0){
+        $issue = $results[0];
+        $user = getUser($issue['assigned_to'],$conn);
+        if($user != "none"){
+            $issue['assigned_to'] = "".$user['firstname']." ".$user['lastname']; 
+        }
+        return json_encode($issue);
+    }
+    return "none";
+}
+
+function getIssues($critera,$conn){
     $request = $conn->prepare("SELECT * FROM Issues");
     $request->execute();
     $results = $request->fetchall();
     $issues ="";
     if(count($results)>0){
+        $add = FALSE;
         foreach($results as $issue){
-            $user = getUser($issue['assigned_to'], $conn);
-            $issues.='<tr>
-            <td class="tTitle"> <p class="title-num">#'.$issue['id'].'</p><p class="title-text">'.$issue['title'].'</p></td>
-            <td class="tType">'.$issue['type'].'</td>
-            <td class="tStatus">'.$issue['status'].'</td>
-            <td class="tassign">'.$user['firstname'].' '.$user['lastname'].'</td>
-            <td class="tcreate">'.$issue['created'].'</td>
-          </tr>';
+            if($critera == "all"){
+                $add = TRUE;
+            }else if ($critera == "open"){
+                if($issue['status'] == "Open"){
+                    $add = True;
+                }else{$add = FALSE;}    
+            }else if($critera == "user"){
+                if($issue['assigned_to'] == $_SESSION['user']['id']){
+                    $add = TRUE;
+                }else{
+                    $add= FALSE;
+                }
+            }
+            if($add){
+                $user = getUser($issue['assigned_to'], $conn);
+                $issues.='<tr>
+                <td class="tTitle"> <p class="title-num">#'.$issue['id'].'</p><p class="title-text" onclick="viewIssue('.$issue['id'].')">'.$issue['title'].'</p></td>
+                <td class="tType">'.$issue['type'].'</td>
+                <td class="tStatus">'.$issue['status'].'</td>
+                <td class="tassign">'.$user['firstname'].' '.$user['lastname'].'</td>
+                <td class="tcreate">'.$issue['created'].'</td>
+                </tr>';
+            }
+            
         }
         return $issues;
     }
@@ -110,7 +170,6 @@ function addIssue($conn){
             $request->bindParam(":create_user",$_SESSION['user']['id']);
             $request->execute();
             return "done";
-
         } 
     }
     return "invalid";
@@ -221,10 +280,10 @@ function getUserId($email, $conn){
 }
 
 function getUser($id, $conn){
-    $check_available = $conn->prepare("SELECT * FROM Users WHERE id LIKE :id");
-    $check_available->bindParam(":id", $id);
-    $check_available->execute();
-    $results = $check_available-> fetchall();
+    $request = $conn->prepare("SELECT * FROM Users WHERE id LIKE :id");
+    $request->bindParam(":id", $id);
+    $request->execute();
+    $results = $request-> fetchall();
     if(count($results) >0){
         $user = $results[0];
         return $user;

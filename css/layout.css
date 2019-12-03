@@ -258,3 +258,11 @@ button:hover {background: #0b7dda;}
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
+
+.title-text:hover{
+  color: yellow;
+}
+
+.title-text{
+  color: #0b7dda;
+}
