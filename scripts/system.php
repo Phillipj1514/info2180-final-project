@@ -100,6 +100,10 @@ function getIssue($id, $conn){
         if($user != "none"){
             $issue['assigned_to'] = "".$user['firstname']." ".$user['lastname']; 
         }
+        $creator = getUser($issue['created_by'],$conn);
+        if($creator != "none"){
+            $issue['created_by'] = "".$creator['firstname']." ".$creator['lastname']; 
+        }
         return json_encode($issue);
     }
     return "none";

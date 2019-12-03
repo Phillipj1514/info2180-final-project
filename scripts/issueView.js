@@ -63,8 +63,8 @@ function main(){
                     let issue = JSON.parse(data);
                     titleText.html(issue.title);
                     descriptionText.html(issue.description);
-                    createDateText.html(issue.created);
-                    updateDateText.html(issue.updated);
+                    createDateText.html("Issue created on "+issue.created+" by "+issue.created_by);
+                    updateDateText.html("Last updated on "+issue.updated);
                     assignUserText.html(issue.assigned_to);
                     typeText.html(issue.type);
                     priorityText.html(issue.priority);
