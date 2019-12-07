@@ -95,12 +95,20 @@ header span{
 }
 
 #fields #filter button{
+	font-family: Arial;
 	margin-top: 0px;
 	margin-left: 10px;
-	width: 90px;
 	border: 1px solid white;
 	background-color: white;
 	color: #252525;
+}
+
+#fields #filter #all, #fields #filter #open{
+	width: 80px;
+}
+
+#fields #filter #tickets{
+	width: 110px;
 }
 
 #fields #filter button:focus{
@@ -116,25 +124,91 @@ header span{
 table{
 	margin-top: 10px;
 	border-collapse: collapse;
+	text-align: left;
 }
 
 tr{
-	border-bottom: 1px solid #f0f0f0;
+	border-top: 1px solid #f0f0f0;
 }
 
 tr:first-child{
 	background-color: #f0f0f0;
 }
 
-#title{
-	padding-right: 300px;
+.title{
+	width: 320px;
 }
 
-#type, #status, #assign{
-	padding-right: 100px;
+.type{
+	width: 80px;
 }
 
-#created{
-	padding-right: 50px;
+.status{
+	text-align: center;
+	width: 100px;
+	padding-right: 30px;
 }
 
+.assign{
+	width: 150px;
+}
+
+.created{
+	width: 100px;
+}
+
+td, th{
+	padding: 5px 0px;
+}
+
+#result td{
+	font-weight: normal;
+}
+
+#result .title{
+	color: #5c94d7;
+}
+
+#result button{
+	font-family: Arial;
+	text-align: left;
+	border: 1px solid lightgrey;
+	padding: 5px;
+	background-color: #2da562;
+	border-radius: 5px;
+	display: block;
+	margin: auto;
+	cursor: context-menu;
+}
+
+#result .status .open{
+	background-color: #2da562;
+	width: 50px;
+}
+
+#result .status .closed{
+	background-color: #ff5400;
+	width: 70px;
+}
+
+#result .status .prog{
+	color: #252525;
+	background-color: #ffdb4d;
+	width: 105px;
+}
+
+#id{
+	color: #252525;
+	font-weight: bold;
+}
+
+#heading{
+	display: flex;
+}
+
+#heading button{
+	background-color: #2da562;
+	margin: 15px 0px 0px 510px;
+	height: 40px;
+	width: 150px;
+}
