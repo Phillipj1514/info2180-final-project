@@ -1,0 +1,140 @@
+*{
+	font-family: Calibri;
+	margin: 0px;
+}
+
+main{
+	color: #252525;
+	height: 100vh;
+	display: grid;
+	grid-template-columns: 15% 80%;
+	grid-template-areas: 
+	"header header"
+	"links fields";
+}
+
+header{
+	grid-area: header;
+	padding: 15px 20px;
+	background-color: black;
+	color: white;
+}
+
+header span{
+	margin-right: 30px;
+}
+
+#links{
+	padding-top: 15px;
+	background-color: #f0f0f0;
+	font-weight: bold;
+	grid-area: links;
+	grid-row: 1/3;
+}
+
+#links a{
+	display: block;
+	padding: 10px;
+	text-decoration: none;
+	color: black;
+}
+
+#links a span{
+	margin-right: 10px;
+}
+
+#links a #plus{
+	margin-right: 7px;
+}
+
+#fields{
+	grid-area: fields;
+	grid-row: 1/3;
+	font-weight: bold;
+	padding: 20px;
+}
+
+#fields h1{
+	padding-bottom: 30px;
+	font-size: 48px;
+}
+
+#fields input, button{
+	display: block;
+	border: 1px solid lightgrey;
+	background-color: #f0f0f0;
+	border-radius: 5px;
+	margin: 10px 0px 20px;
+}
+
+#fields input{
+	padding: 10px 0px 10px 10px;
+	width: 50%;
+}
+
+#fields #desc{
+	padding: 10px 0px 40px 10px;
+}
+
+#fields button{
+	margin-top: 30px;
+	padding: 10px;
+	width: 15%;
+	font-weight: bold;
+	background-color: #1b6ac9;
+	color: white;
+	cursor: pointer;
+}
+
+#error{
+	padding-bottom: 10px;
+}
+
+#fields #filter{
+	display: flex;
+}
+
+#fields #filter button{
+	margin-top: 0px;
+	margin-left: 10px;
+	width: 90px;
+	border: 1px solid white;
+	background-color: white;
+	color: #252525;
+}
+
+#fields #filter button:focus{
+	border: 1px solid lightgrey;
+	background-color: #1b6ac9;
+	color: white;
+}
+
+#fields #filter label{
+	margin-top: 10px;
+}
+
+table{
+	margin-top: 10px;
+	border-collapse: collapse;
+}
+
+tr{
+	border-bottom: 1px solid #f0f0f0;
+}
+
+tr:first-child{
+	background-color: #f0f0f0;
+}
+
+#title{
+	padding-right: 300px;
+}
+
+#type, #status, #assign{
+	padding-right: 100px;
+}
+
+#created{
+	padding-right: 50px;
+}
+
