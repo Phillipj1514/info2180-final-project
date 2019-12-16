@@ -11,7 +11,7 @@ Cloud 9
 
 Work Division
 --------------
-- Justin: Users Database table
-- Shazzam:
-- Chanderpaul:
-- Phillip: Issues Database Table
+- Justin: Issue view and main dashboard
+- Shazzam: add user screeen
+- Chanderpaul: login screen, and main dashboard
+- Phillip: Database and backend functionality
