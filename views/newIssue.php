@@ -26,7 +26,7 @@
         <option value="critical">Critical</option>
       </select> <br>
 
-      <button type = "button" id = "submit"> Submit </button>
+      <button id = "submit"> Submit </button>
     </form>
     <div id = "result"></div>
 </section>

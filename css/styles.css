@@ -1,105 +1,214 @@
-html{
-  box-sizing: content-box;
+*{
+	font-family: Calibri;
+	margin: 0px;
 }
 
-body{
-  margin :0;
-  background-color: #f2f2f2;
+main{
+	color: #252525;
+	height: 100vh;
+	display: grid;
+	grid-template-columns: 15% 80%;
+	grid-template-areas: 
+	"header header"
+	"links fields";
 }
 
 header{
-  background-color: black;
+	grid-area: header;
+	padding: 15px 20px;
+	background-color: black;
+	color: white;
 }
 
-header h1{
-  color: white;
+header span{
+	margin-right: 30px;
 }
 
-
-.grid-container{
-  display: grid;
-  grid-template: 1fr 1fr 1fr 1fr 2fr / .1fr 1fr 1fr 1fr 1fr;
-  /* grid-gap:  0px; */
-  width: auto;
-  height: auto;
-  /* padding: 20px; */
-  /*background-color: yellow;*/
-
+#links{
+	padding-top: 15px;
+	background-color: #f0f0f0;
+	font-weight: bold;
+	grid-area: links;
+	grid-row: 1/3;
 }
 
-.G-div1{ /* --HEADER-- */
-  grid-row-start: 1;
-  grid-row-end: 2;
-  grid-column-start: 1;
-  grid-column-end:6;
-  /* border: 4px white dotted; */
-  background-color: black;
-  display: flex;
-  align-items: flex-end;
-
-
+#links a{
+	display: block;
+	padding: 10px;
+	text-decoration: none;
+	color: black;
 }
 
-.G-div2{ /* --SIDEBAR */
-  text-align: center;
-  /* border: 1px solid black;
-  border-radius: 10px; */
-  height: auto;
-  grid-row-start: 2;
-  grid-row-end: 6;
-  grid-column-start:1;
-  grid-column-end: 2;
-  background-color: #f2f2f2;
-
+#links a span{
+	margin-right: 10px;
 }
 
-.G-div3{
-  grid-row-start: 2;
-  grid-row-end: 6;
-  grid-column-start:3;
-  grid-column-end: 6;
-  background-color: red;
-
+#links a #plus{
+	margin-right: 7px;
 }
 
-
-
-
-/* The sidebar menu */
-.sidenav {
-  height: 100%; /* Full-height: remove this if you want "auto" height */
-  width: 100%; /* Set the width of the sidebar */
-  position: static; /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 1; /* Stay on top */
-  /* top: 0; /* Stay at the top */ */
-  left: 0;
-  background-color: #111; /* Black */
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 20px;
+#fields{
+	grid-area: fields;
+	grid-row: 1/3;
+	font-weight: bold;
+	padding: 20px;
 }
 
-/* The navigation menu links */
-.sidenav a {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
+#fields h1{
+	padding-bottom: 30px;
+	font-size: 48px;
 }
 
-/* When you mouse over the navigation links, change their color */
-.sidenav a:hover {
-  color: #f1f1f1;
+#fields input, button{
+	display: block;
+	border: 1px solid lightgrey;
+	background-color: #f0f0f0;
+	border-radius: 5px;
+	margin: 10px 0px 20px;
 }
 
-/* Style page content */
-.main {
-  margin-left: 160px; /* Same as the width of the sidebar */
-  padding: 0px 10px;
+#fields input{
+	padding: 10px 0px 10px 10px;
+	width: 50%;
 }
 
-/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+#fields #desc{
+	padding: 10px 0px 40px 10px;
+}
+
+#fields button{
+	margin-top: 30px;
+	padding: 10px;
+	width: 15%;
+	font-weight: bold;
+	background-color: #1b6ac9;
+	color: white;
+	cursor: pointer;
+}
+
+#error{
+	padding-bottom: 10px;
+}
+
+#fields #filter{
+	display: flex;
+}
+
+#fields #filter button{
+	font-family: Arial;
+	margin-top: 0px;
+	margin-left: 10px;
+	border: 1px solid white;
+	background-color: white;
+	color: #252525;
+}
+
+#fields #filter #all, #fields #filter #open{
+	width: 80px;
+}
+
+#fields #filter #tickets{
+	width: 110px;
+}
+
+#fields #filter button:focus{
+	border: 1px solid lightgrey;
+	background-color: #1b6ac9;
+	color: white;
+}
+
+#fields #filter label{
+	margin-top: 10px;
+}
+
+table{
+	margin-top: 10px;
+	border-collapse: collapse;
+	text-align: left;
+}
+
+tr{
+	border-top: 1px solid #f0f0f0;
+}
+
+tr:first-child{
+	background-color: #f0f0f0;
+}
+
+.title{
+	width: 320px;
+}
+
+.type{
+	width: 80px;
+}
+
+.status{
+	text-align: center;
+	width: 100px;
+	padding-right: 30px;
+}
+
+.assign{
+	width: 150px;
+}
+
+.created{
+	width: 100px;
+}
+
+td, th{
+	padding: 5px 0px;
+}
+
+#result td{
+	font-weight: normal;
+}
+
+#result .title{
+	color: #5c94d7;
+}
+
+#result button{
+	font-family: Arial;
+	text-align: left;
+	border: 1px solid lightgrey;
+	padding: 5px;
+	background-color: #2da562;
+	border-radius: 5px;
+	display: block;
+	margin: auto;
+	cursor: context-menu;
+}
+
+#result .status .open{
+	background-color: #2da562;
+	width: 50px;
+}
+
+#result .status .closed{
+	background-color: #ff5400;
+	width: 70px;
+}
+
+#result .status .prog{
+	color: #252525;
+	background-color: #ffdb4d;
+	width: 105px;
+}
+
+#id{
+	color: #252525;
+	font-weight: bold;
+}
+
+#heading{
+	display: flex;
+}
+
+#heading button{
+	background-color: #2da562;
+	margin: 15px 0px 0px 510px;
+	height: 40px;
+	width: 150px;
 }
